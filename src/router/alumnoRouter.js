@@ -5,10 +5,9 @@ import alumnoService from "../services/alumnoService.js";
 
 export const routerAlumno = Router ();
 
-
 routerAlumno.get("/alumnos", async(req,res)=>{
     try{
-        const alumnosFound = await alumnoService.getall()
+        const alumnosFound = await alumnoService.getAll()
         if (alumnosFound){
             res.json(alumnosFound)
         } else{

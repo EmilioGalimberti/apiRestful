@@ -1,10 +1,10 @@
 import { Alumno } from "../model/alumnoModel.js";
 
-async function getall(){
+async function getAll(){
     return await Alumno.findAll();
 }
 
 
 export default{
-    getall
+    getAll
 }
