@@ -26,7 +26,7 @@ routerAlumno.get("/alumno/:id", async(req,res)=>{
         if (alumnoFound) {
             res.json(alumnoFound)
         } else {
-            res.status(404).send({ mensaje: 'Producto inexistente! (404) no se encontro' })
+            res.status(404).send({ mensaje: 'Alumno inexistente! (404) no se encontro' })
         }
         console.log(alumnoFound)
     } catch (error) {
@@ -41,12 +41,17 @@ routerAlumno.post("/alumno" , async(req,res)=> {
     Contiene pares clave-valor de datos enviados en el cuerpo de la solicitud. De forma predeterminada, no está
     definido y se completa cuando usa un middleware de análisis del cuerpo, como express.json()
      */
+    try{
     const data = req.body
     const nuevo = await alumnoService.add(data)
     res.json(nuevo) //// Genera una respuesta con un objeto JSON código 200 OK
     console.log(nuevo)
     //no me llegan los datos del post desde postman, puede ser un problema de config
     //reveer
+    }
+    catch{
+        res.status(500).send({ mensaje: 'Error interno!' })
+    }
 })
 
 routerAlumno.delete("/alumno/:id", async(req,res)=>{
@@ -62,7 +67,7 @@ routerAlumno.delete("/alumno/:id", async(req,res)=>{
             // es porque esta intentando hacer una respuesta json de algo que fue borrado
             // "Doble respuesta en tu código"
         } else{
-            res.status(404).send({ mensaje: 'Producto inexistente! (404) no se encontro' })
+            res.status(404).send({ mensaje: 'Alumno inexistente! (404) no se encontro' })
         }
     }catch(error){
         res.status(500).send({ mensaje: 'Error interno!' })
