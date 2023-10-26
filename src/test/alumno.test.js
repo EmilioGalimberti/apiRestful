@@ -114,4 +114,14 @@ describe('PUT /alumno', ()=>{
         );
     }
     )
+    it("Respuesta código 404 con mensaje objeto no encontrado", async () => {
+        const res = await request("localhost:3000").get("/alumno/99");
+        expect(res.statusCode).toEqual(404);
+        expect(res.body).toEqual(
+            expect.objectContaining(
+                { mensaje:  'Alumno inexistente! (404) no se encontro' }
+            )
+        );
+    }
+    )
 })
