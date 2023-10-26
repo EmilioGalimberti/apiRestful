@@ -73,3 +73,22 @@ routerAlumno.delete("/alumno/:id", async(req,res)=>{
         res.status(500).send({ mensaje: 'Error interno!' })
     }
 })
+
+routerAlumno.put("/alumno/:id", async(req,res)=>{
+    try{
+        console.log("Progando put")
+        const id = req.params.id
+        const data = req.body
+        const alumnoFound = await alumnoService.getByID(id)
+        if(alumnoFound){
+            alumnoFound.edad = data.edad
+            res.json(alumnoFound)
+            alumnoFound.save()
+        }else{
+            res.status(404).send({ mensaje: 'Alumno inexistente! (404) no se encontro' })
+        }
+    }
+    catch(error){
+        res.status(500).send({ mensaje: 'Error interno!' })    
+    }
+})

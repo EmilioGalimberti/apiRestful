@@ -1,7 +1,7 @@
 const request = require('supertest')
 
 describe('GET /alumnos', ()=>{
-    it('Deberia devolver cod 200 con un listado de productos no vacio', async()=>{
+    it('Deberia devolver cod 200 con un listado de alumnos no vacio', async()=>{
         const res = await request('localhost:3000')
         .get('/alumnos')
         .set('Accept','application/json')
@@ -95,4 +95,23 @@ describe("DELETE /alumno/:id", ()=>{
             )
         );
     })
+})
+
+describe('PUT /alumno', ()=>{
+    it("Respuesta código 200 con objeto editado", async () => {
+        const res = await request("localhost:3000").put(
+            "/alumno/6"
+        )
+        .set('Accept', 'application/json')
+        .send({edad: 100})
+        expect(res.statusCode).toEqual(200);
+        expect(res.body).toEqual(
+            expect.objectContaining(
+                { 
+                    id: expect.any(Number) 
+                }
+            )
+        );
+    }
+    )
 })
