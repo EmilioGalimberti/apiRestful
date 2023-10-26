@@ -12,12 +12,12 @@ id: {
 nombre: {
     type: DataTypes.TEXT,
     allowNull: false,
-    defaultValue: "NN"
+    
 },
 edad: {
     type: DataTypes.INTEGER,
-    allowNull:false,
-    defaultValue: 0
+    allowNull: false,
+    
 }
 },
 {
