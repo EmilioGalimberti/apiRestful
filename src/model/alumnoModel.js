@@ -21,6 +21,6 @@ edad: {
 }
 },
 {
-    timestamps: false, // omita columnas de auditoría
+    timestamps: true, // omita columnas de auditoría
     sequelize
 })
