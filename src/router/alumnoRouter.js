@@ -1,5 +1,4 @@
 import { Router } from "express";
-import { Alumno } from "../model/alumnoModel.js";
 
 import alumnoService from "../services/alumnoService.js";
 
@@ -48,4 +47,24 @@ routerAlumno.post("/alumno" , async(req,res)=> {
     console.log(nuevo)
     //no me llegan los datos del post desde postman, puede ser un problema de config
     //reveer
+})
+
+routerAlumno.delete("/alumno/:id", async(req,res)=>{
+    try{
+        const id = req.params.id
+        const alumnoFound = await alumnoService.getByID(id)
+        if(alumnoFound){
+            res.json(alumnoFound)
+            alumnoFound.destroy()
+            console.log("Alumno eliminado con existo")
+            //res.json(alumnoFound)  si dejo esta linea me da
+            // Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
+            // es porque esta intentando hacer una respuesta json de algo que fue borrado
+            // "Doble respuesta en tu código"
+        } else{
+            res.status(404).send({ mensaje: 'Producto inexistente! (404) no se encontro' })
+        }
+    }catch(error){
+        res.status(500).send({ mensaje: 'Error interno!' })
+    }
 })
