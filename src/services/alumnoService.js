@@ -8,7 +8,12 @@ async function getByID(id){
     return await Alumno.findOne({where: {id:id}})
 }
 
+async function add(nuevo){
+    return await Alumno.create(nuevo)
+}
+
 export default{
     getAll,
-    getByID
+    getByID,
+    add,
 }

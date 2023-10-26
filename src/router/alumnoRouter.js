@@ -34,3 +34,18 @@ routerAlumno.get("/alumno/:id", async(req,res)=>{
         res.status(500).send({ mensaje: 'Error interno!' })
     }
 })
+
+routerAlumno.post("/alumno" , async(req,res)=> {
+     //generalmente en el get no vamos a levantar el body
+    /*
+    req.body
+    Contiene pares clave-valor de datos enviados en el cuerpo de la solicitud. De forma predeterminada, no está
+    definido y se completa cuando usa un middleware de análisis del cuerpo, como express.json()
+     */
+    const data = req.body
+    const nuevo = await alumnoService.add(data)
+    res.json(nuevo) //// Genera una respuesta con un objeto JSON código 200 OK
+    console.log(nuevo)
+    //no me llegan los datos del post desde postman, puede ser un problema de config
+    //reveer
+})
